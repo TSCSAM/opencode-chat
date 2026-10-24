@@ -1,0 +1,29 @@
+{
+  "name": "opencode-chat",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node server.mjs",
+    "build": "vite build",
+    "start": "node server.mjs --prod",
+    "smoke": "node smoke.mjs",
+    "e2e": "node e2e.mjs"
+  },
+  "dependencies": {
+    "@opencode/client": "^2.1.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "puppeteer-core": "^25.14.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  }
+}
