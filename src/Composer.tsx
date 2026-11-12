@@ -4,7 +4,7 @@ import type { Attachment, MenuItem, PromptFile } from "./types"
 type Props = {
   busy: boolean
   disabled: boolean
-  onSend: (text: string, files: Attachment[], promptFiles: PromptFile[]) => void
+  onSend: (text: string, files: Attachment[], promptFiles: PromptFile[]) => void | Promise<boolean>
   onStop: () => void
   placeholder: string
   slashItems: MenuItem[]
@@ -18,6 +18,7 @@ export function Composer({ busy, disabled, onSend, onStop, placeholder, slashIte
   const [value, setValue] = useState("")
   const [imgs, setImgs] = useState<Attachment[]>([])
   const [files, setFiles] = useState<PromptFile[]>([])
+  const [sending, setSending] = useState(false)
   const [hl, setHl] = useState(0)
   const [closedQuery, setClosedQuery] = useState<string | null>(null)
   const [mResults, setMResults] = useState<Entry[]>([])
@@ -82,8 +83,10 @@ export function Composer({ busy, disabled, onSend, onStop, placeholder, slashIte
 
   const upTo = value.slice(0, caret)
   const atIdx = upTo.lastIndexOf("@")
+  // @ باید در ابتدای متن یا بعد از فاصله باشد؛ وگرنه ایمیل/URL هم منشن باز می‌کند.
+  const atBoundary = atIdx === 0 || (atIdx > 0 && /\s/.test(upTo[atIdx - 1]))
   const between = atIdx >= 0 ? upTo.slice(atIdx + 1) : ""
-  const mentionRaw = atIdx >= 0 && !/[\s]/.test(between) ? between : null
+  const mentionRaw = atIdx >= 0 && atBoundary && !/[\s]/.test(between) ? between : null
   const mentionQuery = mentionRaw !== null && mentionRaw === closedMention ? null : mentionRaw
   const mentionOpen = mentionQuery !== null
 
@@ -129,7 +132,11 @@ export function Composer({ busy, disabled, onSend, onStop, placeholder, slashIte
     if (files.some((f) => f.uri.endsWith(entry.path.replace(/\\/g, "/")))) return
     const base = workdir.replace(/\\/g, "/").replace(/\/+$/, "")
     const abs = entry.path.replace(/\\/g, "/")
-    const uri = abs.startsWith("/") ? "file://" + abs : "file:///" + (base + "/" + abs).replace(/^\//, "")
+    const uri = /^[A-Za-z]:\//.test(abs)
+      ? "file:///" + abs
+      : abs.startsWith("/")
+        ? "file://" + abs
+        : "file:///" + (base + "/" + abs).replace(/^\//, "")
     setFiles((prev) => [...prev, { uri, name: entry.path }])
   }
 
@@ -147,23 +154,34 @@ export function Composer({ busy, disabled, onSend, onStop, placeholder, slashIte
     }
     if (showMenu) {
       const it = filtered[Math.min(hl, filtered.length - 1)]
-      void (it ? pick(it) : sendOrQueue())
+      if (it) pick(it)
+      else void sendOrQueue()
       return
     }
     void sendOrQueue()
   }
 
-  const sendOrQueue = () => {
+  const sendOrQueue = async () => {
     const text = value.trim()
-    if ((!text && imgs.length === 0 && files.length === 0) || disabled) return
+    if (sending || (!text && imgs.length === 0 && files.length === 0) || disabled) return
     const sent = imgs
     const sentFiles = files
+    setSending(true)
+    // فقط بعد از موفقیت ارسال پاک می‌کنیم تا با خطای شبکه متن/پیوست از دست نرود.
+    let ok: boolean | void
+    try {
+      ok = await onSend(text, sent, sentFiles)
+    } catch {
+      return
+    } finally {
+      setSending(false)
+    }
+    if (ok === false) return
     setValue("")
     setImgs([])
     setFiles([])
     setCaret(0)
     setClosedMention(null)
-    onSend(text, sent, sentFiles)
   }
 
   return (
@@ -324,16 +342,17 @@ export function Composer({ busy, disabled, onSend, onStop, placeholder, slashIte
             }
           }}
         />
-        {busy && !value.trim() ? (
+        {busy && (
           <button type="button" className="stop" onClick={onStop} title="توقف">
             <span />
           </button>
-        ) : (
+        )}
+        {(!busy || value.trim() || imgs.length > 0 || files.length > 0) && (
           <button
             type="button"
             className={`send ${busy ? "queued" : ""}`}
             onClick={submit}
-            disabled={(!value.trim() && imgs.length === 0 && files.length === 0) || disabled}
+            disabled={sending || (!value.trim() && imgs.length === 0 && files.length === 0) || disabled}
             title={busy ? "به صف ارسال" : "ارسال"}
           >
             ↑

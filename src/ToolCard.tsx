@@ -53,10 +53,12 @@ export function ToolCard({ part }: { part: Part }) {
   const input = state.input ?? {}
   const blocks: any[] = Array.isArray(state.content) ? state.content : []
   const output = blocks
-    .map((c) => (typeof c?.text === "string" ? c.text : c?.type === "file" ? `[فایل] ${c.path ?? ""}` : ""))
+    .map((c) => (typeof c?.text === "string" ? c.text : c?.type === "file" ? `[فایل] ${c.name ?? c.uri ?? c.path ?? ""}` : ""))
     .filter(Boolean)
     .join("\n")
     .trim()
+  const errorText =
+    typeof state.error === "string" ? state.error : typeof state.error?.message === "string" ? state.error.message : ""
   const title = TITLES[part.name ?? ""] ?? part.name ?? "ابزار"
   const summary = summarize(part)
 
@@ -76,7 +78,8 @@ export function ToolCard({ part }: { part: Part }) {
             <pre dir="ltr" className="tool-pre">{formatInput(input)}</pre>
           )}
           {output && <pre dir="ltr" className="tool-pre tool-out">{output}</pre>}
-          {!output && !Object.keys(input).length && <div className="tool-empty">جزئیاتی ثبت نشده</div>}
+          {errorText && <pre dir="ltr" className="tool-pre tool-err">{errorText}</pre>}
+          {!output && !errorText && !Object.keys(input).length && <div className="tool-empty">جزئیاتی ثبت نشده</div>}
         </div>
       )}
     </div>

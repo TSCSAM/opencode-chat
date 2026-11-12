@@ -1,13 +1,25 @@
 import { useMemo, useState } from "react"
 import type { EngineForm, FormFieldShape } from "./types"
 
-const EMPTY: Record<string, any> = {}
-
 function fieldVisible(f: FormFieldShape, answers: Record<string, any>): boolean {
   if (f.hidden) return false
   const conds = f.when ?? []
   if (conds.length === 0) return true
   return conds.every((c) => (c.op === "eq" ? answers[c.key] === c.value : answers[c.key] !== c.value))
+}
+
+function initialAnswers(fields: FormFieldShape[]) {
+  const out: Record<string, any> = {}
+  for (const field of fields) {
+    if (field.default !== undefined) {
+      out[field.key] = Array.isArray(field.default) ? [...field.default] : field.default
+    }
+  }
+  return out
+}
+
+function emptyValue(value: any) {
+  return value === undefined || value === null || value === "" || (Array.isArray(value) && value.length === 0)
 }
 
 type Props = {
@@ -17,29 +29,39 @@ type Props = {
 }
 
 export function QuestionCard({ form, onReply, onCancel }: Props) {
-  const [answers, setAnswers] = useState<Record<string, any>>(EMPTY)
+  const [answers, setAnswers] = useState<Record<string, any>>(() => initialAnswers(form.fields))
   const [customDraft, setCustomDraft] = useState<Record<string, string>>({})
+  const [validationError, setValidationError] = useState<string | null>(null)
+  const [invalidKey, setInvalidKey] = useState<string | null>(null)
 
   const visible = useMemo(() => form.fields.filter((f) => fieldVisible(f, answers)), [form.fields, answers])
 
   const setAnswer = (key: string, value: any) => {
+    setValidationError(null)
+    setInvalidKey(null)
     setAnswers((prev) => ({ ...prev, [key]: value }))
+  }
+
+  const setCustomValue = (key: string, value: string) => {
+    setValidationError(null)
+    setInvalidKey(null)
+    setCustomDraft((prev) => ({ ...prev, [key]: value }))
   }
 
   const submit = () => {
     const answer: Record<string, any> = {}
     for (const f of visible) {
       const customText = (customDraft[f.key] ?? "").trim()
-      const picked = answers[f.key]
-      if (customText !== "") {
-        answer[f.key] = customText
-        continue
+      const picked = customText !== "" ? customText : answers[f.key] !== undefined ? answers[f.key] : f.default
+      if (f.required && emptyValue(picked)) {
+        setValidationError(`فیلد «${f.title ?? f.key}» الزامی است`)
+        setInvalidKey(f.key)
+        return
       }
-      if (f.required && (picked === undefined || picked === "")) {
-        if (f.default !== undefined) answer[f.key] = f.default
-      }
-      if (picked !== undefined && picked !== "") answer[f.key] = picked
+      if (!emptyValue(picked)) answer[f.key] = picked
     }
+    setValidationError(null)
+    setInvalidKey(null)
     onReply(form, answer)
   }
 
@@ -51,7 +73,7 @@ export function QuestionCard({ form, onReply, onCancel }: Props) {
       </div>
 
       {visible.map((f) => (
-        <div key={f.key} className="qfield">
+        <div key={f.key} className={`qfield ${invalidKey === f.key ? "invalid" : ""}`}>
           <div className="qfield-title" dir="auto">
             {f.title ?? f.key}
             {f.required && <span className="qreq"> *</span>}
@@ -106,7 +128,7 @@ export function QuestionCard({ form, onReply, onCancel }: Props) {
               className="qcustom"
               placeholder="یا پاسخ دستی بنویس…"
               value={customDraft[f.key] ?? ""}
-              onChange={(e) => setCustomDraft((prev) => ({ ...prev, [f.key]: e.target.value }))}
+              onChange={(e) => setCustomValue(f.key, e.target.value)}
             />
           ) : null}
 
@@ -153,6 +175,8 @@ export function QuestionCard({ form, onReply, onCancel }: Props) {
           )}
         </div>
       ))}
+
+      {validationError && <div className="qform-error" role="alert">{validationError}</div>}
 
       <div className="qcard-actions">
         <button type="button" className="qsubmit" onClick={submit}>

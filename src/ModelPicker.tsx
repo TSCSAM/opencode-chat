@@ -15,7 +15,10 @@ export function ModelPicker({ models, value, onPick, onClose }: Props) {
 
   useEffect(() => {
     const down = (e: MouseEvent) => {
-      if (box.current && !box.current.contains(e.target as Node)) onClose()
+      const target = e.target as Node
+      // دکمه‌ی بازکننده هم‌خانواده‌ی همین پاپ‌اور است؛ اگر آن را «بیرون» حساب
+      // کنیم، mousedown اول می‌بندد و click بعدی دوباره بازش می‌کند.
+      if (box.current && !box.current.contains(target) && !box.current.parentElement?.contains(target)) onClose()
     }
     const key = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose()
@@ -35,7 +38,7 @@ export function ModelPicker({ models, value, onPick, onClose }: Props) {
       .filter((m) => !q || `${m.name} ${m.modelID} ${m.providerID}`.toLowerCase().includes(q))
   }, [models, query])
 
-  const isCurrent = (m: ModelInfo) => value?.providerID === m.providerID && value?.id === (m.modelID ?? m.id)
+  const isCurrent = (m: ModelInfo) => value?.providerID === m.providerID && value?.id === m.id
 
   return (
     <div className="model-pop" ref={box}>
@@ -57,7 +60,7 @@ export function ModelPicker({ models, value, onPick, onClose }: Props) {
           </div>
         ) : (
           list.map((m) => {
-          const id = m.modelID ?? m.id
+          const id = m.id
           const variants = (m.variants ?? []).map((v) => v.id)
           const current = isCurrent(m)
           const open = expanded === id

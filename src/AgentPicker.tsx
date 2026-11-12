@@ -13,7 +13,8 @@ export function AgentPicker({ agents, value, onPick, onClose }: Props) {
 
   useEffect(() => {
     const down = (e: MouseEvent) => {
-      if (box.current && !box.current.contains(e.target as Node)) onClose()
+      const target = e.target as Node
+      if (box.current && !box.current.contains(target) && !box.current.parentElement?.contains(target)) onClose()
     }
     const key = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose()

@@ -108,3 +108,53 @@ export type ModelInfo = {
   variants?: { id: string }[]
   limit?: { context?: number; output?: number }
 }
+
+export type ProviderInfo = {
+  id: string
+  canonical?: string
+  integrationID?: string
+  name: string
+  activation: "auto" | "enabled" | "disabled" | string
+  package?: string
+  settings?: Record<string, any>
+  headers?: Record<string, string>
+  body?: Record<string, any>
+}
+
+export type IntegrationMethod = {
+  type: "key" | "env" | "oauth" | "external" | "command" | string
+  id?: string
+  label?: string
+  names?: string[]
+  form?: FormFieldShape[]
+}
+
+export type ConnectionStatus = { status: string; message?: string; url?: string }
+
+export type IntegrationConnection =
+  | { type: "credential"; id: string; label: string; method: string; status?: ConnectionStatus }
+  | { type: "env"; name: string; status?: ConnectionStatus }
+
+export type IntegrationInfo = {
+  id: string
+  name: string
+  metadata?: Record<string, any>
+  methods: IntegrationMethod[]
+  connections: IntegrationConnection[]
+}
+
+export type CredentialEntry = {
+  id: string
+  integrationID: string
+  label: string
+  active: boolean
+  value: { type?: string; key?: string; methodID?: string; metadata?: Record<string, any> }
+}
+
+export type UpdateCheck = {
+  current?: string
+  latest?: string | null
+  available?: boolean
+  checkedAt?: number
+  error?: string
+}

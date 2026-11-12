@@ -26,6 +26,7 @@ type Props = {
   workdir: string
   updateAvailable?: string | null
   onUpdate: () => void
+  onSettings: () => void
   onWorkdir: (dir: string) => Promise<boolean>
   onSelect: (id: string) => void
   onNew: () => void
@@ -33,7 +34,7 @@ type Props = {
   onDelete: (id: string) => void | Promise<void>
 }
 
-export function Sidebar({ sessions, activeId, connected, version, workdir, updateAvailable, onUpdate, onWorkdir, onSelect, onNew, onRename, onDelete }: Props) {
+export function Sidebar({ sessions, activeId, connected, version, workdir, updateAvailable, onUpdate, onSettings, onWorkdir, onSelect, onNew, onRename, onDelete }: Props) {
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(workdir)
   const [renaming, setRenaming] = useState<string | null>(null)
@@ -186,9 +187,23 @@ export function Sidebar({ sessions, activeId, connected, version, workdir, updat
             <span>موتور v{version ?? "?"}</span>
             {updateAvailable && <span className="upd-badge">آپدیت!</span>}
           </button>
-          <span className="app-version" title="نسخه‌ی این پنل وب">
-            پنل v{__APP_VERSION__}
-          </span>
+          <div className="foot-actions">
+            <span className="app-version" title="نسخه‌ی این پنل وب">
+              پنل v{__APP_VERSION__}
+            </span>
+            <button
+              type="button"
+              className="foot-settings"
+              onClick={onSettings}
+              title="تنظیمات OpenCode"
+              aria-label="تنظیمات OpenCode"
+            >
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </aside>

@@ -1,5 +1,12 @@
 import type { Message, Part } from "./types"
 
+// رویدادهای فشرده‌سازی فقط sessionID را در delta/ended/failed دارند؛ inputID
+// تنها در started و به‌صورت اختیاری می‌آید. برای همین کلید را همیشه با
+// sessionID می‌سازیم تا حباب started و delta/ended به هم وصل شوند.
+function compactionKey(d: any) {
+  return String(d.sessionID ?? d.inputID ?? "compaction")
+}
+
 function messageFor(list: Message[], id: string, created: number): Message {
   const i = list.findIndex((m) => m.id === id)
   if (i === -1) {
@@ -116,13 +123,14 @@ export function reduce(prev: Message[], ev: any): ReduceResult {
       return { messages: list }
     }
 
-    case "session.tool.error": {
+    case "session.tool.failed": {
       const msg = messageFor(list, d.assistantMessageID, created)
       const part = toolPart(msg, d.id)
       part.state = {
         status: "error",
         input: part.state?.input ?? {},
-        content: d.content ?? [{ type: "text", text: d.error ?? "خطای ابزار" }],
+        error: d.error,
+        content: d.content ?? [],
         metadata: d.metadata,
       }
       return { messages: list }
@@ -146,7 +154,7 @@ export function reduce(prev: Message[], ev: any): ReduceResult {
       return { messages: prev, busy: false, done: true }
 
     case "session.compaction.started": {
-      const key = String(d.inputID ?? d.sessionID ?? "compaction")
+      const key = compactionKey(d)
       const list: Message[] = [...prev]
       const msg: Message = {
         id: `comp:${key}`,
@@ -161,7 +169,7 @@ export function reduce(prev: Message[], ev: any): ReduceResult {
     }
 
     case "session.compaction.delta": {
-      const key = String(d.inputID ?? d.sessionID ?? "compaction")
+      const key = compactionKey(d)
       const list = [...prev]
       const i = list.findIndex((m) => m.id === `comp:${key}`)
       if (i === -1) {
@@ -183,7 +191,7 @@ export function reduce(prev: Message[], ev: any): ReduceResult {
     }
 
     case "session.compaction.ended": {
-      const key = String(d.inputID ?? d.sessionID ?? "compaction")
+      const key = compactionKey(d)
       const list = [...prev]
       const i = list.findIndex((m) => m.id === `comp:${key}`)
       if (i >= 0) {
@@ -197,7 +205,7 @@ export function reduce(prev: Message[], ev: any): ReduceResult {
     }
 
     case "session.compaction.failed": {
-      const key = String(d.inputID ?? d.sessionID ?? "compaction")
+      const key = compactionKey(d)
       const list = [...prev]
       const i = list.findIndex((m) => m.id === `comp:${key}`)
       const why = d.error?.message ?? d.error?.name ?? d.error ?? "فشرده‌سازی ناموفق بود"

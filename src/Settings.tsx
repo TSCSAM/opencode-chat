@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { appPost, del, get, patch, post } from "./api"
 import type { AgentInfo, ConfigEntry, McpEntry, PluginEntry, SavedPermission } from "./types"
+import { Providers } from "./Providers"
 
 const EXCLUDED = new Set(["theme", "keybinds", "tooltips", "$schema"])
 
-type TabKey = "general" | "perms" | "mcp" | "plugins" | "advanced"
+type TabKey = "general" | "providers" | "perms" | "mcp" | "plugins" | "advanced"
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "general", label: "عمومی" },
+  { key: "providers", label: "پرووایدرها" },
   { key: "perms", label: "دسترسی‌ها" },
   { key: "mcp", label: "سرورهای MCP" },
   { key: "plugins", label: "افزونه‌ها" },
@@ -18,7 +20,26 @@ function title(v: any) {
   return String(v).replace(/^\s+|\s+$/g, "")
 }
 
-export function Settings({ onClose }: { onClose: () => void }) {
+// مسیر کلیدهایی که در متن پیشرفته حذف شده‌اند (به‌صورت بازگشتی)، تا سرور
+// بتواند آن‌ها را از فایل JSONC پاک کند؛ deepMerge به‌تنهایی فقط اضافه/تغییر
+// می‌دهد و کلید حذف‌شده را باقی می‌گذارد.
+function removedPaths(base: any, next: any, prefix: string[] = []): string[][] {
+  if (!base || typeof base !== "object" || Array.isArray(base)) return []
+  if (!next || typeof next !== "object" || Array.isArray(next)) return []
+  const out: string[][] = []
+  for (const [key, value] of Object.entries(base)) {
+    if (!(key in next)) {
+      out.push([...prefix, key])
+      continue
+    }
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      out.push(...removedPaths(value, (next as any)[key], [...prefix, key]))
+    }
+  }
+  return out
+}
+
+export function Settings({ onClose, onChanged }: { onClose: () => void; onChanged?: () => void }) {
   const [tab, setTab] = useState<TabKey>("general")
   const [cfgPath, setCfgPath] = useState<string | null>(null)
   const [cfg, setCfg] = useState<Record<string, any>>({})
@@ -86,7 +107,13 @@ export function Settings({ onClose }: { onClose: () => void }) {
       const res = await appPost<{ ok?: boolean; error?: string }>("/app/config/write", { patch: patchBody })
       if (res?.ok === false) throw new Error(res.error ?? "ذخیره ناموفق بود")
       if (shellDraft.trim() !== (shell || "")) {
-        await patch("/api/experimental/config", { shell: shellDraft.trim() === "" ? null : shellDraft.trim() }).catch(() => null)
+        try {
+          await patch("/api/experimental/config", {
+            shell: shellDraft.trim() === "" ? null : shellDraft.trim(),
+          })
+        } catch (e: any) {
+          throw new Error(`ذخیرهٔ shell ناموفق بود: ${e.message}`)
+        }
       }
       await loadConfig()
       onClose()
@@ -114,15 +141,18 @@ export function Settings({ onClose }: { onClose: () => void }) {
       setError(`JSON نامعتبر: ${e.message}`)
       return
     }
-    for (const k of EXCLUDED) delete parsed[k]
-    if (typeof parsed !== "object" || Array.isArray(parsed)) {
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
       setError("تنظیمات باید یک آبجکت JSON باشد")
       return
     }
+    for (const k of EXCLUDED) delete parsed[k]
     setSaving(true)
     setError(null)
+    // deepMerge فقط کلیدهای موجود در patch را تغییر می‌دهد؛ کلیدهایی که کاربر
+    // از متن حذف کرده باید صریحاً حذف شوند، وگرنه در فایل باقی می‌مانند.
+    const remove = removedPaths(cfg, parsed).filter((p) => !(p.length === 1 && EXCLUDED.has(p[0])))
     try {
-      const res = await appPost<{ ok?: boolean; error?: string }>("/app/config/write", { patch: parsed })
+      const res = await appPost<{ ok?: boolean; error?: string }>("/app/config/write", { patch: parsed, remove })
       if (res?.ok === false) throw new Error(res.error ?? "ذخیره ناموفق بود")
       await loadConfig()
       setAdvancedDraft(null)
@@ -206,6 +236,7 @@ export function Settings({ onClose }: { onClose: () => void }) {
             </div>
           )}
 
+          {tab === "providers" && <Providers onChanged={onChanged} />}
           {tab === "perms" && <Perms />}
           {tab === "mcp" && <Mcp cfg={cfg} reload={loadConfig} />}
           {tab === "plugins" && <Plugins />}
@@ -328,7 +359,7 @@ function Mcp({ cfg, reload }: { cfg: Record<string, any>; reload: () => Promise<
     if (!title(name) || !title(url)) { setErr("نام و url لازم است"); return }
     try {
       await appPost("/app/config/write", {
-        patch: { mcp: { [title(name)]: { type: "remote", url: title(url) } } },
+        patch: { mcp: { servers: { [title(name)]: { type: "remote", url: title(url) } } } },
       })
       setAdding(false)
       setName("")
