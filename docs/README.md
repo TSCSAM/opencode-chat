@@ -92,13 +92,14 @@ app/                      ← frontend, local server, tests, tools, data and bui
   tests/                  ← smoke, MCP and end-to-end scripts
   tools/                  ← launcher, build check, watchdog and release packager
   dist/                   ← generated production bundle (not in source archives)
-docs/                     ← README, CHANGELOG, LICENSE and screenshots
+docs/                     ← README, CHANGELOG, LICENSE and screenshots (repository only)
 release/                  ← generated source archives (not in source archives)
 .github/                  ← CI and release workflows (repository only)
 ```
 
-The release zip contains only `Start OpenCode Chat.cmd`, `app/` and `docs/`.
-Repository-only files such as `.github/` workflows are not shipped to users.
+The release zip contains only `Start OpenCode Chat.cmd`, `LICENSE` and `app/`.
+Documentation and screenshots stay in this repository, and repository-only files such as
+`.github/` workflows are not shipped to users.
 
 ## Quick Start
 
@@ -111,8 +112,9 @@ Download `opencode-chat-v1.14.0-source.zip` from the
 Start OpenCode Chat.cmd
 ```
 
-The archive contains source only (no `node_modules`, `dist`, caches or screenshots) and
-keeps the layout above. On first run the launcher installs dependencies inside `app/`,
+The archive contains source only (no `node_modules`, `dist`, caches, screenshots or
+documentation) and keeps the launcher and `app/` layout shown above. On first run the
+launcher installs dependencies inside `app/`,
 builds the app, starts the OpenCode engine in the background and opens the browser. The
 console window closes automatically once the app is ready. Use the **Exit** button at the
 top of the panel to stop the server and the OpenCode engine together. Later runs only need
@@ -336,13 +338,14 @@ GPL-3.0; see [`app/THIRD_PARTY_NOTICES.md`](../app/THIRD_PARTY_NOTICES.md) and
 README.md                 ← صفحهٔ معرفی در گیت‌هاب (فقط در مخزن)
 Start OpenCode Chat.cmd   ← لانچر
 app/                      ← فرانت‌اند، سرور محلی، تست‌ها، ابزارها، داده و بیلد
-docs/                     ← README، CHANGELOG، LICENSE و تصاویر
+docs/                     ← README، CHANGELOG، LICENSE و تصاویر (فقط در مخزن)
 release/                  ← آرشیوهای ساخته‌شده
 .github/                  ← ورک‌فلوهای CI و انتشار (فقط در مخزن)
 ```
 
-فایل زیپ انتشار فقط شامل `Start OpenCode Chat.cmd`، پوشهٔ `app` و پوشهٔ `docs` است.
-فایل‌های مخصوص مخزن مثل ورک‌فلوهای `.github` داخل زیپ کاربران قرار نمی‌گیرند.
+فایل زیپ انتشار فقط شامل `Start OpenCode Chat.cmd`، فایل `LICENSE` و پوشهٔ `app` است.
+مستندات و تصاویر در مخزن گیت‌هاب می‌مانند و فایل‌های مخصوص مخزن مثل ورک‌فلوهای
+`.github` داخل زیپ کاربران قرار نمی‌گیرند.
 
 ### شروع سریع
 

@@ -32,6 +32,8 @@
   primary is selected.
 - The relay header and pool counts now include the direct connection, and the page
   description names all three route types.
+- Release archives now contain only the launcher, `LICENSE` and `app/`. Documentation and
+  screenshots stay in the GitHub repository and are not bundled in the download.
 
 ### Fixed
 

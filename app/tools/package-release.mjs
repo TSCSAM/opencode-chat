@@ -1,9 +1,10 @@
 // Builds the small, clean source archive that is attached to a GitHub release.
-// The archive keeps the user-facing layout: the Windows launcher at the top,
-// the app in app/ and documentation in docs/. Repository-only files such as
-// .github workflows are intentionally left out. node_modules, dist, release,
-// caches, logs and local secrets are never included: the launcher installs
-// dependencies and builds the app on the user's machine.
+// The archive keeps the user-facing layout: the Windows launcher and the
+// license at the top, and the app in app/. Documentation stays in the GitHub
+// repository, so docs/ is intentionally left out of the download. Repository-
+// only files such as .github workflows are also left out. node_modules, dist,
+// release, caches, logs and local secrets are never included: the launcher
+// installs dependencies and builds the app on the user's machine.
 import crypto from "node:crypto"
 import fs from "node:fs"
 import path from "node:path"
@@ -65,10 +66,11 @@ function collect(dir, prefix = "") {
 }
 
 const launcher = path.join(projectRoot, "Start OpenCode Chat.cmd")
+const license = path.join(docsRoot, "LICENSE")
 const files = [
   ...(fs.existsSync(launcher) ? [{ full: launcher, relative: "Start OpenCode Chat.cmd" }] : []),
+  ...(fs.existsSync(license) ? [{ full: license, relative: "LICENSE" }] : []),
   ...collect(appRoot, "app"),
-  ...collect(docsRoot, "docs"),
 ].sort((a, b) => a.relative.localeCompare(b.relative))
 
 const crcTable = (() => {

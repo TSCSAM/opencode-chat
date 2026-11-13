@@ -105,13 +105,14 @@ engine (`npm install -g opencode-ai`).
 README.md                 ← GitHub landing page (repository only)
 Start OpenCode Chat.cmd   ← double-click launcher (Windows)
 app/                      ← frontend, local server, tests, tools, data and build
-docs/                     ← README, CHANGELOG, LICENSE and screenshots
+docs/                     ← README, CHANGELOG, LICENSE and screenshots (repository only)
 .github/                  ← CI and release workflows (repository only)
 release/                  ← generated source archives (not shipped)
 ```
 
-The release zip contains only `Start OpenCode Chat.cmd`, `app/` and `docs/`; caches,
-`node_modules`, `dist`, logs and local provider data are never included.
+The release zip contains only `Start OpenCode Chat.cmd`, `LICENSE` and `app/`;
+documentation and screenshots stay in this repository. Caches, `node_modules`, `dist`,
+logs and local provider data are never included.
 
 ## Documentation
 
