@@ -1,0 +1,4 @@
+# Documentation lives in the repository but is not part of downloadable
+# release source archives. The custom release zip is built by
+# app/tools/package-release.mjs and excludes docs/ on its own.
+/docs export-ignore
