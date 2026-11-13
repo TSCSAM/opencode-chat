@@ -1,0 +1,35 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+release/
+*.tsbuildinfo
+
+# logs and test artifacts
+*.log
+npm-debug.log*
+coverage/
+shot-*.png
+screenshot*.png
+mcp-image-*.png
+tests/tmp-tools/
+data/tool-memory.json
+data/tool-state.json
+
+# local environment and secrets
+.env
+.env.*
+.npmrc
+data/custom-providers.json
+
+# editor and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# temporary files
+.tmp*
+*.tmp

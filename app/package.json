@@ -1,0 +1,47 @@
+{
+  "name": "opencode-chat",
+  "private": true,
+  "type": "module",
+  "version": "1.14.0",
+  "scripts": {
+    "dev": "node server/server.mjs --dir=..",
+    "build": "vite build",
+    "start": "node server/server.mjs --prod --dir=..",
+    "smoke": "node tests/smoke.mjs",
+    "e2e": "node tests/e2e.mjs",
+    "release:pack": "node tools/package-release.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@opencode/client": "^2.1.0",
+    "cheerio": "^1.2.0",
+    "ffmpeg-static": "^5.3.0",
+    "jsonc-parser": "^3.3.1",
+    "jszip": "^3.10.2",
+    "marked": "^18.2.0",
+    "nodemailer": "^10.5.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.5.438",
+    "pptxgenjs": "4.0.0",
+    "puppeteer-core": "^25.17.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "turndown": "^7.2.5",
+    "undici": "^7.30.2",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  },
+  "overrides": {
+    "image-size": "2.1.0"
+  }
+}

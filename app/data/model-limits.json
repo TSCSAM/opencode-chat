@@ -1,0 +1,748 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-13",
+  "description": "ظرفیت کانتکس و حداکثر خروجی مدل‌ها بر اساس اطلاعات سایت پرووایدر/سازنده. ورودی‌هایی که «verified» دارند مستقیماً از سایت سازنده تأیید شده‌اند.",
+  "sources": {
+    "opencode": {
+      "url": "https://opencode.ai/inference/v1/models",
+      "label": "کاتالوگ رسمی OpenCode Console"
+    },
+    "agentrouter": {
+      "url": "https://models.dev/api.json",
+      "label": "models.dev"
+    },
+    "zai": {
+      "url": "https://docs.z.ai/guides/llm",
+      "label": "مستندات Z.ai"
+    },
+    "zhipuai": {
+      "url": "https://docs.z.ai/guides/llm",
+      "label": "مستندات Z.ai"
+    },
+    "deepseek": {
+      "url": "https://api-docs.deepseek.com",
+      "label": "مستندات DeepSeek"
+    },
+    "xiaomi": {
+      "url": "https://platform.xiaomimimo.com/",
+      "label": "مستندات Xiaomi MiMo"
+    },
+    "minimax": {
+      "url": "https://platform.minimax.io/",
+      "label": "مستندات MiniMax"
+    },
+    "moonshotai": {
+      "url": "https://platform.moonshot.ai/",
+      "label": "مستندات Moonshot"
+    },
+    "nvidia": {
+      "url": "https://build.nvidia.com/",
+      "label": "مستندات NVIDIA"
+    },
+    "thinkingmachines": {
+      "url": "https://thinkingmachines.ai/",
+      "label": "مستندات Thinking Machines"
+    },
+    "longcat": {
+      "url": "https://longcat.chat/",
+      "label": "مستندات LongCat"
+    },
+    "anthropic": {
+      "url": "https://docs.anthropic.com/",
+      "label": "مستندات Anthropic"
+    },
+    "openai": {
+      "url": "https://platform.openai.com/docs",
+      "label": "مستندات OpenAI"
+    },
+    "google": {
+      "url": "https://ai.google.dev/gemini-api/docs",
+      "label": "مستندات Google"
+    },
+    "xai": {
+      "url": "https://docs.x.ai/",
+      "label": "مستندات xAI"
+    },
+    "mistral": {
+      "url": "https://docs.mistral.ai/",
+      "label": "مستندات Mistral"
+    },
+    "alibaba": {
+      "url": "https://www.alibabacloud.com/help/en/model-studio/",
+      "label": "مستندات Alibaba Model Studio"
+    }
+  },
+  "notes": {
+    "opencode": "OpenCode Console — کاتالوگ رسمی OpenCode Zen (86 مدل)",
+    "zai": "models.dev — 5 مدل",
+    "zhipuai": "models.dev — 5 مدل",
+    "deepseek": "models.dev — 2 مدل",
+    "xiaomi": "models.dev — 4 مدل",
+    "minimax": "models.dev — 4 مدل",
+    "moonshotai": "models.dev — 3 مدل",
+    "nvidia": "models.dev — 3 مدل",
+    "thinkingmachines": "models.dev — 2 مدل",
+    "longcat": "models.dev — 2 مدل",
+    "alibaba": "models.dev — 4 مدل",
+    "anthropic": "models.dev — 4 مدل",
+    "openai": "models.dev — 3 مدل",
+    "google": "models.dev — 3 مدل",
+    "xai": "models.dev — 1 مدل",
+    "mistral": "models.dev — 1 مدل",
+    "agentrouter": "models.dev — 5 مدل"
+  },
+  "providers": {
+    "opencode": {
+      "models": {
+        "big-pickle": {
+          "context": 200000,
+          "output": 32000,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 200K context · 32K max output"
+        },
+        "mimo-v2.6-flash-free": {
+          "context": 200000,
+          "output": 32000,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 200K context · 32K max output (the full MiMo-V2.6-Flash spec is 1M/128K)"
+        },
+        "deepseek-v4.1-flash-free": {
+          "context": 200000,
+          "output": 32000,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 200K context · 32K max output (the paid deepseek-v4.1-flash is 1M/384K)"
+        },
+        "glm-5.3-flash-free": {
+          "context": 200000,
+          "output": 32000,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 200K context · 32K max output (the full GLM-5.3-Flash spec is 1M/128K)"
+        },
+        "claude-fable-5": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-fable-5-1": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-haiku-4-5": {
+          "context": 200000,
+          "output": 64000
+        },
+        "claude-haiku-5-5": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-opus-4-5": {
+          "context": 200000,
+          "output": 64000
+        },
+        "claude-opus-4-6": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-opus-4-7": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-opus-4-8": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-opus-5": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-opus-5-5": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-sonnet-4-5": {
+          "context": 1000000,
+          "output": 64000
+        },
+        "claude-sonnet-4-6": {
+          "context": 1000000,
+          "output": 64000
+        },
+        "claude-sonnet-5": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-sonnet-5-5": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "deepseek-v4.1-flash": {
+          "context": 1000000,
+          "output": 384000
+        },
+        "deepseek-v4-pro": {
+          "context": 1000000,
+          "output": 384000
+        },
+        "gemini-3.5-flash": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "gemini-3.5-flash-lite": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "gemini-3.6-flash": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "gemini-3.7-flash": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "gemini-3.8-flash": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "gemini-4-argon": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "glm-5": {
+          "context": 204800,
+          "output": 131072
+        },
+        "glm-5.1": {
+          "context": 204800,
+          "output": 131072
+        },
+        "glm-5.2": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "glm-5.3": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "glm-5.3-flash": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "gpt-5": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5-codex": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5-nano": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.1": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.1-codex": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.1-codex-max": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.1-codex-mini": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.2": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.2-codex": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.3-codex": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.3-codex-spark": {
+          "context": 128000,
+          "output": 128000
+        },
+        "gpt-5.4": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-5.4-mini": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.4-nano": {
+          "context": 400000,
+          "output": 128000
+        },
+        "gpt-5.4-pro": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-5.5": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-5.5-pro": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-5.6-luna": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-5.6-sol": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-6-astra": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-6-sol": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-6.1-sol": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-6-luna": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-5.6-terra": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "grok-4.5": {
+          "context": 500000,
+          "output": 500000
+        },
+        "grok-4.6": {
+          "context": 500000,
+          "output": 500000
+        },
+        "grok-4.7": {
+          "context": 500000,
+          "output": 500000
+        },
+        "grok-build-0.1": {
+          "context": 256000,
+          "output": 256000
+        },
+        "kimi-k2.5": {
+          "context": 262144,
+          "output": 65536
+        },
+        "kimi-k2.6": {
+          "context": 262144,
+          "output": 65536
+        },
+        "kimi-k2.7-code": {
+          "context": 262144,
+          "output": 262144
+        },
+        "kimi-k3": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "minimax-m2.5": {
+          "context": 204800,
+          "output": 131072
+        },
+        "minimax-m2.7": {
+          "context": 204800,
+          "output": 131072
+        },
+        "minimax-m3": {
+          "context": 512000,
+          "output": 128000
+        },
+        "muse-spark-1.2": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "muse-spark-1.3": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "muse-wonder-1.0": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "mistral-large-4": {
+          "context": 524288,
+          "output": 262144
+        },
+        "qwen3.5-plus": {
+          "context": 262144,
+          "output": 65536
+        },
+        "qwen3.6-plus": {
+          "context": 262144,
+          "output": 65536
+        },
+        "qwen3.8-flash": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "qwen3.8-max": {
+          "context": 262144,
+          "output": 131072
+        },
+        "longcat-2.5-free": {
+          "context": 1000000,
+          "output": 262144,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 1M context · 256K max output"
+        },
+        "iceman-free": {
+          "context": 262144,
+          "output": 131072,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 256K context · 128K max output"
+        },
+        "inkling-2-small-free": {
+          "context": 1048576,
+          "output": 131072,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 1M context · 128K max output"
+        },
+        "beam-free": {
+          "context": 1048576,
+          "output": 131072,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 1M context · 128K max output"
+        },
+        "flint-40b-free": {
+          "context": 262144,
+          "output": 65536,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 256K context · 64K max output"
+        },
+        "nemotron-3.5-super-vl-free": {
+          "context": 1048576,
+          "output": 131072,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 1M context · 128K max output"
+        },
+        "nemotron-3.5-lightning-free": {
+          "context": 262144,
+          "output": 262144,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 256K context · 256K max output"
+        },
+        "muse-ember-1.0": {
+          "context": 1048576,
+          "output": 270000
+        },
+        "claude-fable-5-2": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "minimax-m3.1-flash-free": {
+          "context": 1000000,
+          "output": 512000,
+          "source": "https://opencode.ai/inference/v1/models",
+          "verified": true,
+          "note": "OpenCode Zen Free: 1M context · 512K max output"
+        },
+        "gemini-4-carbon": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "gemini-4-hydrogen": {
+          "context": 1048576,
+          "output": 65536
+        }
+      }
+    },
+    "zai": {
+      "models": {
+        "glm-5.3": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "glm-5.3-flash": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "glm-5.2": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "glm-5.1": {
+          "context": 200000,
+          "output": 131072
+        },
+        "glm-5": {
+          "context": 204800,
+          "output": 131072
+        }
+      }
+    },
+    "zhipuai": {
+      "models": {
+        "glm-5.3": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "glm-5.3-flash": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "glm-5.2": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "glm-5.1": {
+          "context": 200000,
+          "output": 131072
+        },
+        "glm-5": {
+          "context": 204800,
+          "output": 131072
+        }
+      }
+    },
+    "deepseek": {
+      "models": {
+        "deepseek-v4-pro": {
+          "context": 1048576,
+          "output": 393216
+        },
+        "deepseek-v4-flash": {
+          "context": 1048576,
+          "output": 393216
+        }
+      }
+    },
+    "xiaomi": {
+      "models": {
+        "mimo-v2.6-flash": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "mimo-v2.6-pro": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "mimo-v2.5": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "mimo-v2.5-pro": {
+          "context": 1048576,
+          "output": 131072
+        }
+      }
+    },
+    "minimax": {
+      "models": {
+        "MiniMax-M3.1-Flash": {
+          "context": 1000000,
+          "output": 524288
+        },
+        "MiniMax-M3": {
+          "context": 1000000,
+          "output": 524288
+        },
+        "MiniMax-M2.7": {
+          "context": 204800,
+          "output": 131072
+        },
+        "MiniMax-M2.5": {
+          "context": 204800,
+          "output": 131072
+        }
+      }
+    },
+    "moonshotai": {
+      "models": {
+        "kimi-k3": {
+          "context": 1048576,
+          "output": 1048576
+        },
+        "kimi-k2.7-code": {
+          "context": 262144,
+          "output": 262144
+        },
+        "kimi-k2.6": {
+          "context": 262144,
+          "output": 262144
+        }
+      }
+    },
+    "nvidia": {
+      "models": {
+        "nvidia/nemotron-3-ultra-550b-a55b": {
+          "context": 1000000,
+          "output": 65536
+        },
+        "nvidia/nemotron-3.5-lightning-30b-a3b": {
+          "context": 262144,
+          "output": 262144
+        },
+        "nvidia/nemotron-3.5-super-vl-120b-a12b": {
+          "context": 1048576,
+          "output": 8192
+        }
+      }
+    },
+    "thinkingmachines": {
+      "models": {
+        "thinkingmachines/Inkling-Small": {
+          "context": 65536,
+          "output": 65536
+        },
+        "thinkingmachines/Inkling": {
+          "context": 65536,
+          "output": 65536
+        }
+      }
+    },
+    "longcat": {
+      "models": {
+        "LongCat-2.5-Preview": {
+          "context": 1048576,
+          "output": 262144
+        },
+        "LongCat-2.0": {
+          "context": 1048576,
+          "output": 131072
+        }
+      }
+    },
+    "alibaba": {
+      "models": {
+        "qwen3.8-max": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "qwen3.6-plus": {
+          "context": 1000000,
+          "output": 65536
+        },
+        "qwen3.5-plus": {
+          "context": 1000000,
+          "output": 65536
+        },
+        "qwen3.8-flash": {
+          "context": 1000000,
+          "output": 131072
+        }
+      }
+    },
+    "anthropic": {
+      "models": {
+        "claude-opus-5": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-opus-4-8": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-sonnet-5": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "claude-haiku-5-5": {
+          "context": 1000000,
+          "output": 128000
+        }
+      }
+    },
+    "openai": {
+      "models": {
+        "gpt-5.6-sol": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-6.1-sol": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "gpt-5.4": {
+          "context": 1050000,
+          "output": 128000
+        }
+      }
+    },
+    "google": {
+      "models": {
+        "gemini-3.8-flash": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "gemini-4-argon": {
+          "context": 1048576,
+          "output": 32768
+        },
+        "gemini-4-carbon": {
+          "context": 1048576,
+          "output": 32768
+        }
+      }
+    },
+    "xai": {
+      "models": {
+        "grok-4.7": {
+          "context": 500000,
+          "output": 500000
+        }
+      }
+    },
+    "mistral": {
+      "models": {
+        "mistral-large-4": {
+          "context": 1048576,
+          "output": 262144
+        }
+      }
+    },
+    "agentrouter": {
+      "models": {
+        "gpt-5.6-sol": {
+          "context": 1050000,
+          "output": 128000
+        },
+        "glm-5.3": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "claude-opus-5": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "deepseek-v4-flash": {
+          "context": 1000000,
+          "output": 384000
+        },
+        "claude-opus-4-8": {
+          "context": 1000000,
+          "output": 128000
+        }
+      }
+    }
+  }
+}

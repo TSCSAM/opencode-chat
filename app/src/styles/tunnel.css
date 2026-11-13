@@ -1,0 +1,485 @@
+/* ---------------------------------------------------------------- Local tunnel route */
+.tunnel-card {
+  border-color: #2b4059;
+  background: linear-gradient(180deg, rgba(76, 154, 255, 0.055), transparent 120px), var(--panel);
+}
+
+.tunnel-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tunnel-pill.is-ok {
+  color: var(--ok);
+  border-color: rgba(63, 185, 80, 0.35);
+  background: rgba(63, 185, 80, 0.1);
+}
+
+.tunnel-pill.is-pending {
+  color: var(--warn);
+  border-color: rgba(210, 153, 34, 0.35);
+  background: rgba(210, 153, 34, 0.1);
+}
+
+.tunnel-pill.is-off,
+.tunnel-pill.is-err {
+  color: var(--muted);
+  border-color: var(--line);
+  background: var(--panel-2);
+}
+
+.tunnel-pill.is-err {
+  color: var(--danger);
+  border-color: rgba(248, 81, 73, 0.35);
+}
+
+.tunnel-head-actions {
+  flex-wrap: wrap;
+}
+
+.tunnel-note {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 11px;
+  font-size: 12.5px;
+  color: var(--muted);
+  background: var(--panel-2);
+}
+
+.tunnel-note.is-warn {
+  border-color: rgba(210, 153, 34, 0.35);
+  background: rgba(210, 153, 34, 0.08);
+  color: var(--warn);
+}
+
+.tunnel-problem {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  background: var(--panel-2);
+  color: var(--muted);
+}
+
+.tunnel-problem strong {
+  display: block;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.tunnel-problem p {
+  margin: 0 0 8px;
+  font-size: 12.5px;
+}
+
+.tunnel-problem code {
+  font-size: 11.5px;
+  color: var(--warn);
+}
+
+.tunnel-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(250px, 0.55fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.tunnel-config,
+.tunnel-options {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel-2);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tunnel-block-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tunnel-block-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.tunnel-count {
+  font-size: 11px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
+.tunnel-region-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+  gap: 6px;
+  max-height: 246px;
+  overflow: auto;
+  padding-inline-end: 2px;
+}
+
+.tunnel-region-option {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  cursor: pointer;
+  font-size: 12px;
+  min-width: 0;
+}
+
+.tunnel-region-pick {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.tunnel-region-probe {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  height: 17px;
+  min-width: 17px;
+  padding: 0 2px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.tunnel-region-probe:hover:not(:disabled) {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.tunnel-region-probe:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.tunnel-region-probe.is-ok {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.tunnel-region-probe.is-err {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.tunnel-region-probe.is-busy {
+  color: var(--warn);
+}
+
+.tunnel-probe-spinner {
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  animation: tunnel-probe-spin 0.7s linear infinite;
+}
+
+@keyframes tunnel-probe-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tunnel-region-option:hover {
+  border-color: #3a5b80;
+}
+
+.tunnel-region-option.is-checked {
+  border-color: rgba(76, 154, 255, 0.55);
+  background: rgba(76, 154, 255, 0.1);
+}
+
+.tunnel-region-option input {
+  accent-color: var(--accent);
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.tunnel-region-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.tunnel-region-label {
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11.5px;
+}
+
+.tunnel-save-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.tunnel-dirty-hint {
+  font-size: 11.5px;
+  color: var(--warn);
+}
+
+.tunnel-mode-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 11px;
+}
+
+.tunnel-radio-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tunnel-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 9px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.tunnel-radio.is-checked {
+  border-color: rgba(76, 154, 255, 0.55);
+  color: var(--text);
+  background: rgba(76, 154, 255, 0.08);
+}
+
+.tunnel-radio input {
+  accent-color: var(--accent);
+  margin: 0;
+}
+
+.tunnel-pin-select {
+  max-width: 280px;
+}
+
+.tunnel-apply-mode {
+  align-self: flex-start;
+}
+
+.tunnel-options .relays-check-option {
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.tunnel-options .relays-check-option:last-of-type {
+  border-bottom: 0;
+}
+
+.tunnel-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 9px;
+}
+
+.tunnel-meta strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.tunnel-status-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.tunnel-empty {
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.tunnel-region-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 9px;
+}
+
+.tunnel-region-card {
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid var(--muted);
+  border-radius: 10px;
+  background: var(--panel-2);
+  padding: 10px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tunnel-region-card.is-ok {
+  border-inline-start-color: var(--ok);
+}
+
+.tunnel-region-card.is-pending {
+  border-inline-start-color: var(--warn);
+}
+
+.tunnel-region-card.is-err {
+  border-inline-start-color: var(--danger);
+}
+
+.tunnel-region-card-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+}
+
+.tunnel-region-card-head strong {
+  color: var(--text);
+}
+
+.tunnel-state-badge {
+  margin-inline-start: auto;
+  font-size: 10.5px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 7px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.tunnel-state-badge.is-ok {
+  color: var(--ok);
+  border-color: rgba(63, 185, 80, 0.35);
+  background: rgba(63, 185, 80, 0.09);
+}
+
+.tunnel-state-badge.is-pending {
+  color: var(--warn);
+  border-color: rgba(210, 153, 34, 0.35);
+  background: rgba(210, 153, 34, 0.09);
+}
+
+.tunnel-state-badge.is-err {
+  color: var(--danger);
+  border-color: rgba(248, 81, 73, 0.35);
+  background: rgba(248, 81, 73, 0.09);
+}
+
+.tunnel-region-metrics {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tunnel-region-limit {
+  font-size: 11.5px;
+  color: var(--warn);
+  border: 1px solid rgba(210, 153, 34, 0.25);
+  background: rgba(210, 153, 34, 0.07);
+  border-radius: 8px;
+  padding: 5px 8px;
+}
+
+.tunnel-test-result {
+  font-size: 11.5px;
+  border-radius: 8px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.tunnel-test-result.is-ok {
+  color: var(--ok);
+  border-color: rgba(63, 185, 80, 0.25);
+  background: rgba(63, 185, 80, 0.06);
+}
+
+.tunnel-test-result.is-err {
+  color: var(--danger);
+  border-color: rgba(248, 81, 73, 0.25);
+  background: rgba(248, 81, 73, 0.06);
+}
+
+.tunnel-region-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.relay-platform-badge.is-psiphon {
+  color: #9ecbff;
+  border-color: rgba(76, 154, 255, 0.35);
+  background: rgba(76, 154, 255, 0.1);
+}
+
+@media (max-width: 900px) {
+  .tunnel-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tunnel-region-grid {
+    max-height: 210px;
+  }
+}
+
+@media (max-width: 560px) {
+  .tunnel-head-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .tunnel-region-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tunnel-pin-select {
+    max-width: none;
+  }
+}

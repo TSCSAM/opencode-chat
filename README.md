@@ -2,131 +2,175 @@
 
 <p align="center">
   <a href="https://nodejs.org"><img alt="Node.js" src="https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&logoColor=white"></a>
-  <a href="https://github.com/TSCSAM/opencode-chat/releases"><img alt="Version" src="https://img.shields.io/badge/version-1.1.0-blue"></a>
+  <a href="https://github.com/TSCSAM/opencode-chat/releases"><img alt="Version" src="https://img.shields.io/badge/version-1.14.0-blue"></a>
   <a href="https://opencode.ai"><img alt="OpenCode" src="https://img.shields.io/badge/OpenCode-v2-4B74E1"></a>
   <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey">
 </p>
 
 <p align="center">
-  <b>رابط وب فارسی و راست‌به‌چپ برای موتور OpenCode</b><br>
-  A beautiful, RTL-first web UI (Telegram-style) for the OpenCode engine — chats, agents, models,<br>
-  permissions, file mentions, image pasting, token usage, config editor and engine updates.
+  <img src="docs/assets/opencode-chat-dashboard.png" alt="OpenCode Chat dashboard: conversation view, model picker, relay status and composer" width="100%">
 </p>
 
-## چرا OpenCode Chat؟
+<p align="center">
+  <b>A bilingual (English / Persian) web UI for the OpenCode engine</b><br>
+  Telegram-style chat, agents, models, permissions, projects, a local 20-group tool hub,<br>
+  custom providers, an image editor and three-way relay routing — all in your browser.
+</p>
 
-ترمینال موتور OpenCode الگوریتم دوجهته‌ی یونیکد (bidi) ندارد؛ متن فارسی در TUI
-راست‌به‌چپ نمایش داده نمی‌شود و اسکرول و انتخاب آن دشوار است. این پروژه همان
-موتور OpenCode را در قالب یک وب‌اپ فارسی و RTL ارائه می‌دهد: چت حبابی
-تلگرام‌مانند، رندر Markdown با بلوک کد LTR، کنترل کامل جلسه‌ها و تنظیمات — همه
-داخل مرورگر.
+<p align="center">
+  <b>English</b> · <a href="#فارسی">فارسی</a> · <a href="docs/README.md">Full documentation</a>
+</p>
 
-## ویژگی‌ها (Features)
+## Why OpenCode Chat?
 
-| قابلیت | توضیح |
-|---|---|
-| 💬 **چت RTL تلگرام‌مانند** | حباب‌های پیام، گروه‌بندی نوبت‌ها، رندر Markdown همراه بلوک کد LTR |
-| ✏️ **ویرایش آخرین پیام** | ویرایش متن آخرین پیام کاربر در همان حباب، با حفظ پیوست‌ها و امکان بازگرداندن پیام اصلی اگر ارسال جایگزین شکست بخورد |
-| 🤖 **ایجنت‌ها و مدل‌ها** | انتخاب و ساخت ایجنت (build/plan و…)، انتخاب مدل، تعیین مدل پیش‌فرض، همگام‌سازی زندهٔ مدل‌ها و مدل‌های Fast بدون حذف اشتباهی |
-| 🔌 **پرووایدرها و اتصال‌ها** | مدیریت کامل Integrationهای OpenCode: کلید API، OAuth، متغیر محیطی، ورود خارجی و دستور؛ فعال/غیرفعال‌کردن credentialها و نمایش صادقانهٔ اتصال خودکار از محیط موتور |
-| 🗂️ **جلسه‌ها** | ساخت، جابه‌جایی بین جلسه‌ها، تغییر نام، حذف دومرحله‌ای، صف‌کردن پیام هنگام اشتغال ایجنت |
-| 📜 **تاریخچه** | بارگذاری پیام‌های قدیمی‌تر با صفحه‌بندی زنده |
-| ❓ **سؤال تعاملی** | وقتی ایجنت از کاربر پرسش چندگزینه‌ای می‌کند، فرم تعاملی بالای کادر پیام باز می‌شود (انتخاب گزینه، پاسخ دستی، رد کردن) |
-| ⏪ **بازگردانی پیام (Undo)** | پس‌گرفتن آخرین پیام و پاسخ آن با یک دستور |
-| 📋 **خروجی (Export)** | کپی کل گفت‌وگو در کلیپ‌بورد به‌صورت Markdown یا دانلود فایل `.md` |
-| ⚡ **دستورهای `/`** | منوی شناور با فیلتر زنده: `/new` `/sessions` `/model` `/agent` `/compact` `/undo` `/export` `/interrupt` `/settings` `/update` به‌همراه دستورها و مهارت‌های موتور |
-| 🗜️ **فشرده‌سازی زمینه** | `/compact` با حباب زنده‌ی پیشرفت و خلاصه‌ی استریم‌شونده |
-| 📎 **کارت ابزارهای هوشمند** | نمایش هر ابزار (ترمینال/نوشتن فایل/…) با عنوان و خلاصه‌ی مناسب، باز کردن جزئیات و مجوزها با گزینه‌ی «همیشه اجازه بده» |
-| 🖼️ **تصویر و فایل** | چسباندن تصویر با Ctrl+V یا کشیدن‌ورهاکردن؛ منشن فایل با `@` و جست‌وجوی زنده در فایل‌های پروژه |
-| 📊 **مصرف زمینه** | چیپ درصد مصرف و تفکیک توکن‌ها (ورودی، کش، خروجی) به‌همراه هزینه |
-| ⚙️ **تنظیمات OpenCode** | ویرایشگر کامل `opencode.jsonc` (مجوزها، MCP، افزونه‌ها، بخش پیشرفته) — به‌جز تم و کیبایند که این نسخه خودش دارد |
-| 🛡️ **امنیت** | توکن موتور هرگز به مرورگر نمی‌رسد؛ پروکسی محلی با Host/Origin allowlist، CSP، nosniff، محدودیت اندازهٔ بدنه و سخت‌سازی CSRF |
-| 🔄 **به‌روزرسانی موتور** | بررسی نسخه از npm، نشانگر «آپدیت!»، نمایش نسخهٔ جدید و نصب رسمی با استریم خروجی + راه‌اندازی مجدد سرویس |
-| 📦 **نسخه‌بندی** | نسخه‌ی پنل (`v1.1.0`) در پایین سایدبار و چرخ‌دندهٔ تنظیمات کنار آن نمایش داده می‌شود |
+The OpenCode terminal UI has no Unicode bidi handling, so Persian text is hard to read,
+select and scroll. This project puts the same engine behind a fast, modern web interface
+that supports both English (LTR) and Persian (RTL). Chat bubbles, Markdown with LTR code
+blocks, complete session controls and settings live in the browser.
 
-## پیش‌نیازها (Prerequisites)
+**English is the default language.** Use the `EN / فا` button at the bottom of the sidebar
+or **Settings → General → Language** to switch. The choice is stored in `localStorage`
+(`oc-lang`) and applied immediately, including `lang` and `dir` on the document.
 
-- **Node.js 20+** برای اجرای سرور و بیلد — [nodejs.org](https://nodejs.org)
-- **موتور OpenCode** — `npm install -g opencode-ai`
-- مرورگر مدرن (Chrome، Edge یا Firefox؛ برای تست‌های خودکار Chrome لازم است)
-- ویندوز ۱۰ یا ۱۱ برای اجرا با دابل‌کلیک لانچر؛ در لینوکس و مک: `npm run start`
+## Highlights
 
-## شروع سریع (Quick Start)
+- **Telegram-style chat** with message bubbles, Markdown, LTR code blocks, edit, queue,
+  undo, compact, export and live token usage.
+- **Projects and permission modes** — keep several workspace folders, switch between them,
+  and choose **Plan / Ask / Auto / Full** per session.
+- **Agents, models, providers and custom endpoints** — manage credentials, OAuth,
+  environment variables, model limits and any OpenAI-, Anthropic- or Responses-compatible
+  endpoint from Settings.
+- **A local 20-group MCP tool hub** — files, documents, web/browser, images, media, data,
+  SQLite, computer control, shell, code, Git/GitHub, DevOps, maps, SEO, messaging, memory,
+  workflows and translation, registered with the engine automatically.
+- **Images and files** — paste, drag and drop or attach any file; annotate images with
+  point zoom, pan and drawing tools, then save the result back to the composer.
+- **Three-way relay routing** — direct connection, cloud relays on Vercel, Netlify and
+  Cloudflare, and regional Psiphon exits share one pool with a selectable primary route,
+  automatic rotation and 429/error failover.
+- **Bilingual, secure and self-contained** — English and Persian RTL everywhere; the engine
+  token never reaches the browser; a local authenticated proxy enforces Host/Origin
+  allowlists, CSP and body limits.
 
-**راه ۱ — بستهٔ سورس ریلیز:**
+## What's new in v1.14.0
 
-فایل `opencode-chat-v1.1.0-source.zip` را از صفحهٔ Releases دانلود و از حالت فشرده خارج کن؛
-سپس دابل‌کلیک کن:
+- **One routing policy for all three route types.** Choose automatic, direct, any enabled
+  cloud relay or a specific tunnel region as the primary route; automatic rotation and
+  failover live in the same panel.
+- **The direct connection is a first-class route.** Its card stays visible above the cloud
+  relays even when relays are active, reports the last HTTP status, and can be selected as
+  primary or included in rotation/failover.
+- **Per-region tunnel primary.** Every ready Psiphon region has **Select as primary** and
+  shows the **Selected primary relay** pill when chosen.
+- **Saving zero tunnel regions is allowed.** Save is enabled whenever the selection is
+  dirty; saving an empty list stops active clients and clears a removed tunnel primary.
+- **Failover works in both directions** between direct, cloud relays and tunnel regions,
+  and a primary that is temporarily reconnecting is preserved while fallback routes serve
+  the request.
 
-```
+See [`docs/CHANGELOG.md`](docs/CHANGELOG.md) for the full history since v1.1.0.
+
+## Quick start
+
+### From a release archive
+
+Download the latest `opencode-chat-v1.14.0-source.zip` from
+[Releases](https://github.com/TSCSAM/opencode-chat/releases/latest), extract it and run:
+
+```text
 Start OpenCode Chat.cmd
 ```
 
-بستهٔ ریلیز فقط سورس تمیز است (`node_modules` و `dist` داخل آن نیستند). اولین اجرا
-وابستگی‌ها را نصب و برنامه را بیلد می‌کند، موتور OpenCode را در پس‌زمینه بالا می‌آورد
-و مرورگر را باز می‌کند. از این به بعد فقط یک دابل‌کلیک کافی است؛ حتی پس از خاموش و
-روشن‌شدن سیستم، نیازی به اجرای دستی چیزی نیست.
+The first run installs dependencies inside `app/`, builds the frontend, starts the OpenCode
+engine in the background and opens the browser. Later runs only need a double-click. Use
+the red **Exit** button in the panel to stop the server and the engine together.
 
-**راه ۲ — از سورس:**
+### From source
 
 ```bash
+cd app
 npm install
 npm run build
 npm run start
 # → http://127.0.0.1:5178
 ```
 
-**راه ۳ — توسعه:**
+Requirements: **Node.js 20+** (22.5+ recommended for the SQLite tool) and the OpenCode
+engine (`npm install -g opencode-ai`).
 
-```bash
-npm run dev     # سرور + Vite Dev با هات‌ریلود
+## Project layout
+
+```text
+README.md                 ← GitHub landing page (repository only)
+Start OpenCode Chat.cmd   ← double-click launcher (Windows)
+app/                      ← frontend, local server, tests, tools, data and build
+docs/                     ← README, CHANGELOG, LICENSE and screenshots
+.github/                  ← CI and release workflows (repository only)
+release/                  ← generated source archives (not shipped)
 ```
 
-## آزمون‌ها (Tests)
+The release zip contains only `Start OpenCode Chat.cmd`, `app/` and `docs/`; caches,
+`node_modules`, `dist`, logs and local provider data are never included.
 
-- `npm run smoke` — رفت‌وبرگشت کامل با مدل واقعی و بررسی رندر بلوک کد
-- `npm run e2e` — ۱۰ مرحله‌ی کامل رابط (دستورها، صف، undo/export، منشن `@`، آپلود تصویر، فرم سؤال و…)
+## Documentation
 
-هر دو با Chrome headless اجرا می‌شوند (مسیر Chrome با متغیر `CHROME_PATH` قابل تغییر است).
+- [Full README and Persian guide](docs/README.md)
+- [Changelog](docs/CHANGELOG.md)
+- [Third-party notices](app/THIRD_PARTY_NOTICES.md)
+- [MIT License](docs/LICENSE) © TSCSAM
 
-## معماری (Architecture)
-
-```
-مرورگر  ──/oc/api/*──▶  server.mjs  ──(Authorization)──▶  OpenCode engine
-```
-
-| فایل | کار |
-| --- | --- |
-| `server.mjs` | پروکسی احراز هویت‌شده + سرو اپ + آپلود تصویر + نوشتن تنظیمات + آپدیت و راه‌اندازی مجدد موتور |
-| `src/App.tsx` | وضعیت، رویدادهای زنده، ارسال، تأییدها، دستورهای `/` |
-| `src/Composer.tsx` | کادر ارسال: منوی `/`، منشن `@`، پیوست تصویر، صف |
-| `src/Settings.tsx` | پنل تنظیمات OpenCode |
-| `src/Providers.tsx` | مدیریت پرووایدرها، Integrationها و credentialهای موتور |
-| `src/Update.tsx` | پنل به‌روزرسانی موتور |
-| `src/Sidebar.tsx` | جلسه‌ها، تغییر پوشه، نسخه‌ها |
-| `src/reduce.ts` | کاهش‌گر رویدادهای `session.*` به پیام‌ها |
-| `src/QuestionCard.tsx` | فرم سؤال تعاملی موتور |
-
-## نسخه‌بندی پنل وب
-
-نسخه در `package.json` تعریف می‌شود و در پایین سایدبار (کنار نسخه‌ی موتور) نمایش
-داده می‌شود: `v1.0.1` برای اصلاح کوچک، `v1.1.0` برای قابلیت تازه و `v2.0.0` برای
-تغییر بزرگ. بعد از تغییر نسخه، فقط `npm run build` کافی است. تاریخچهٔ کامل تغییرات
-در [`CHANGELOG.md`](CHANGELOG.md) نگهداری می‌شود.
-
-## محدودیت‌های فعلی (Limitations)
-
-- پیام‌های قدیمی‌تر که از `/session/context` بارگذاری می‌شوند فقط متنی رندر می‌شوند (بدون کارت ابزار)
-- تم و کیبایند موتور در این پنل وجود ندارد (عمداً؛ این نسخه تم خودش را دارد)
-- رندر PDF و Word یا نمایش ترمینال PTY داخل چت پشتیبانی نمی‌شود
-
-## عیب‌یابی (Troubleshooting)
-
-- «موتور وصل نشد» → `npm install -g opencode-ai` را اجرا کن و سپس لانچر را دوباره باز کن
-- پورت اشغال است → پیش از اجرا `set PORT=5179` را تنظیم کن
-- بیلد قدیمی را می‌بینی → `Ctrl+R` (فایل‌ها مستقیم از دیسک سرو می‌شوند)
-- کنسول سرور (پنجره‌ی سیاه) پیام‌های راهنمای فارسی چاپ می‌کند — متن آن را بفرست
+The bundled Psiphon tunnel client binaries are third-party software under GPL-3.0; see the
+notices and `app/server/psiphon/LICENSE`.
 
 ---
 
-⭐ اگر این پروژه به کارت آمد، ستاره بده — «OpenCode web UI | رابط وب فارسی برای OpenCode»
+<div dir="rtl" align="right">
+
+## فارسی
+
+**OpenCode Chat** یک رابط وب دوزبانه (انگلیسی / فارسی) برای موتور OpenCode است. زبان
+پیش‌فرض انگلیسی است و با دکمهٔ `EN / فا` در پایین سایدبار یا از مسیر
+**تنظیمات → عمومی → زبان** می‌توانید فارسی (RTL) را انتخاب کنید.
+
+### نکات برجسته
+
+- چت تلگرام‌مانند با Markdown، بلوک کد LTR، ویرایش پیام، صف، بازگردانی، فشرده‌سازی و
+  خروجی Markdown
+- مدیریت چند پروژه، حالت‌های مجوز Plan / Ask / Auto / Full و پیوست هر نوع فایل
+- مدیریت ایجنت‌ها، مدل‌ها، پرووایدرها، کلیدها و endpointهای سازگار با OpenAI / Anthropic
+- هاب محلی ۲۰ گروه ابزار MCP برای فایل، سند، وب، مرورگر، تصویر، داده، SQLite، شل،
+  کد، Git، DevOps، نقشه، سئو، پیام‌رسان، حافظه، گردش‌کار و ترجمه
+- ویرایشگر تصویر با زوم روی نقطهٔ دلخواه، جابه‌جایی و ذخیره در چت
+- استخر مسیر مشترک برای **اتصال مستقیم**، **رله‌های ابری Vercel / Netlify / Cloudflare**
+  و **تونل چندمنطقه‌ای Psiphon**؛ انتخاب مسیر اصلی (مستقیم، هر رله یا هر منطقهٔ تونل)،
+  چرخش خودکار و جابه‌جایی روی خطای 429/5xx/شبکه بین هر سه
+- رابط کامل RTL، امنیت پروکسی محلی و به‌روزرسانی موتور از داخل پنل
+
+### شروع سریع
+
+آخرین بستهٔ سورس را از صفحهٔ [Releases](https://github.com/TSCSAM/opencode-chat/releases/latest)
+دانلود کنید، از حالت فشرده خارج کنید و `Start OpenCode Chat.cmd` را اجرا کنید. اولین اجرا
+وابستگی‌ها را نصب، برنامه را بیلد و موتور را در پس‌زمینه اجرا می‌کند. برای خاموش‌کردن کامل،
+از دکمهٔ **Exit** در پنل استفاده کنید.
+
+از سورس:
+
+```bash
+cd app
+npm install
+npm run build
+npm run start
+# → http://127.0.0.1:5178
+```
+
+پیش‌نیازها: Node.js 20+ (برای ابزار SQLite، نسخهٔ 22.5+ توصیه می‌شود) و موتور OpenCode
+(`npm install -g opencode-ai`).
+
+### مستندات
+
+- [راهنمای کامل فارسی و انگلیسی](docs/README.md)
+- [تاریخچهٔ تغییرات](docs/CHANGELOG.md)
+- [مجوز MIT](docs/LICENSE) © TSCSAM
+
+</div>

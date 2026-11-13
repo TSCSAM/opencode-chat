@@ -1,8 +1,35 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
 release/
-*.png
+*.tsbuildinfo
+
+# Logs and test artifacts
 *.log
+npm-debug.log*
+coverage/
+shot-*.png
+screenshot*.png
+mcp-image-*.png
+app/tests/tmp-tools/
+app/data/tool-memory.json
+app/data/tool-state.json
+
+# Local environment, secrets and user data
 .env
 .env.*
+.npmrc
+app/data/custom-providers.json
+
+# Editor and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
 .tmp*
+*.tmp
