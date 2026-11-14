@@ -2,7 +2,7 @@
   "name": "opencode-chat",
   "private": true,
   "type": "module",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "scripts": {
     "dev": "node server/server.mjs --dir=..",
     "build": "vite build",

@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://nodejs.org"><img alt="Node.js" src="https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&logoColor=white"></a>
-  <a href="https://github.com/TSCSAM/opencode-chat/releases"><img alt="Version" src="https://img.shields.io/badge/version-1.14.0-blue"></a>
+  <a href="https://github.com/TSCSAM/opencode-chat/releases"><img alt="Version" src="https://img.shields.io/badge/version-1.14.1-blue"></a>
   <a href="https://opencode.ai"><img alt="OpenCode" src="https://img.shields.io/badge/OpenCode-v2-4B74E1"></a>
   <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey">
 </p>
@@ -105,7 +105,7 @@ Documentation and screenshots stay in this repository, and repository-only files
 
 ### 1. From a release archive
 
-Download `opencode-chat-v1.14.0-source.zip` from the
+Download `opencode-chat-v1.14.1-source.zip` from the
 [Releases](https://github.com/TSCSAM/opencode-chat/releases) page, extract it and run:
 
 ```text

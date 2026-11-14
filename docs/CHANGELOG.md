@@ -1,5 +1,15 @@
 # Changelog / تاریخچهٔ تغییرات
 
+## v1.14.1 — 2026-11-14
+
+### Fixed
+
+- **New chat:** the sidebar button passed its React click event as the optional project
+  directory. In the minified production build this surfaced as
+  `e.startsWith is not a function` and no conversation was created. The handler now
+  ignores non-string overrides, and the button calls `onNew()` without the event.
+- Version bumped to **1.14.1**.
+
 ## v1.14.0 — 2026-11-13
 
 ### Added

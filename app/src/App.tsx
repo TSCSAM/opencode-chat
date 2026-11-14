@@ -1657,7 +1657,10 @@ export default function App() {
     setPage("chat")
     try {
       const fallback = config?.directory
-      let directory = dirOverride ?? (workdir || fallback)
+      // React click handlers pass the event as the first argument. Ignore
+      // anything that is not a real path instead of calling string methods on it.
+      const override = typeof dirOverride === "string" ? dirOverride : ""
+      let directory = override || workdir || fallback
       // اگر مقدار ذخیره‌شده نسبی باشد (مثل «C:» یا «.»)، حتی یک بار هم به موتور
       // فرستاده نمی‌شود؛ Session.create با 500 و بدنهٔ خالی پاسخ می‌دهد.
       if (directory && !isAbsoluteDir(directory)) {

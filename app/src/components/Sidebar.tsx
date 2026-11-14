@@ -119,7 +119,7 @@ export const Sidebar = memo(function Sidebar({
         )}
       </div>
 
-      <button type="button" className="new-chat" onClick={onNew}>
+      <button type="button" className="new-chat" onClick={() => onNew()}>
         <span>+</span> {t("New chat")}
       </button>
 
